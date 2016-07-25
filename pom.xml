@@ -9,6 +9,11 @@
     <module>akka</module>
     <module>nio</module>
     <module>concurrent</module>
+    <module>lambda</module>
+    <module>rabbitMQ</module>
+    <module>shiro</module>
+    <module>springBatch</module>
+    <module>spark</module>
   </modules>
   <properties>
     <!-- 文件拷贝时的编码 -->
@@ -16,6 +21,8 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- 编译时的编码 -->
     <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+    <!--<maven.compiler.source>1.8</maven.compiler.source>-->
+    <!--<maven.compiler.target>1.8</maven.compiler.target>-->
     <junit.version>4.12</junit.version>
   </properties>
   <name>tutorial</name>
