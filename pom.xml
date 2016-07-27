@@ -14,6 +14,7 @@
     <module>shiro</module>
     <module>springBatch</module>
     <module>spark</module>
+    <module>jdk8</module>
   </modules>
   <properties>
     <!-- 文件拷贝时的编码 -->
