@@ -14,7 +14,6 @@ public class DemoActor extends UntypedActor {
     public static Props props(final int magicNumber) {
         return Props.create(new Creator<DemoActor>() {
             private static final long serialVersionUID = 1L;
-
             @Override
             public DemoActor create() {
                 return new DemoActor(magicNumber);

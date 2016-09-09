@@ -25,19 +25,23 @@ public class App {
     List<String> strs = Lists.newArrayList("target", "tar", "get", "target");
     ExecutorService executor =  Executors.newFixedThreadPool(10);
     ArchiveSearch searcher = new ArchiveSearchImpl(strs) ;
-    void showSearch(final String target)
-            throws InterruptedException {
+    void showSearch1(final String target) throws InterruptedException {
         Future<String> future
-                = executor.submit(new Callable<String>() {
-            public String call() {
-                return searcher.search(target);
-            }});
+                = executor.submit(() -> searcher.search(target));
         displayOtherThings(); // do other things while searching
         try {
             displayText(future.get()); // use future
         } catch (ExecutionException ex) { cleanup(); return; }
     }
 
+    void showSearch2(final String target) throws InterruptedException {
+       FutureTask<String> future = new FutureTask<String>(() -> searcher.search(target));
+        executor.execute(future);
+        displayOtherThings(); // do other things while searching
+        try {
+            displayText(future.get()); // use future
+        } catch (ExecutionException ex) { cleanup(); return; }
+    }
     private void displayOtherThings() {
         System.out.println("after search...");
     }
@@ -53,6 +57,6 @@ public class App {
     public static void main(String[] args) throws InterruptedException {
 
         App app = new App();
-        app.showSearch("target");
+        app.showSearch2("target");
     }
 }

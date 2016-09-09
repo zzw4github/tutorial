@@ -11,39 +11,43 @@ import java.util.concurrent.TimeUnit;
  * Created by infosea on 2016-07-27.
  */
 class NetworkService implements Runnable {
-       private final ServerSocket serverSocket;
-       private final ExecutorService pool;
+    private final ServerSocket serverSocket;
+    private final ExecutorService pool;
 
-               public NetworkService(int port, int poolSize)
-           throws IOException {
-             serverSocket = new ServerSocket(port);
-             pool = Executors.newFixedThreadPool(poolSize);
-           }
+    public NetworkService(int port, int poolSize)
+            throws IOException {
+        serverSocket = new ServerSocket(port);
+        pool = Executors.newFixedThreadPool(poolSize);
+    }
 
-               public void run() { // run the service
-             try {
-                   for (;;) {
-                         pool.execute(new Handler(serverSocket.accept()));
-                       }
-                 } catch (IOException ex) {
-                   pool.shutdown();
-                 }
-           }
-     }
+    public void run() { // run the service
+        try {
+            for (; ; ) {
+                pool.execute(new Handler(serverSocket.accept()));
+            }
+        } catch (IOException ex) {
+            pool.shutdown();
+        }
+    }
+}
 
-         class Handler implements Runnable {
-             private final Socket socket;
+class Handler implements Runnable {
+    private final Socket socket;
 
-             Handler(Socket socket) {
-                 this.socket = socket;
-             }
+    Handler(Socket socket) {
+        this.socket = socket;
+    }
+    byte[] bytes = new byte[128];
+    public void run() {
+        try {
+                socket.getInputStream().read(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(new String(bytes));
+    }
 
-             public void run() {
-                 // read and service request on socket
-             }
-
-         }
-
+}
 
 
 public class App {
@@ -69,5 +73,10 @@ public class App {
             // Preserve interrupt status
             Thread.currentThread().interrupt();
         }
+    }
+
+    public static void main(String... args) throws IOException {
+        NetworkService service = new NetworkService( 8088, 5);
+        new Thread(service).start();
     }
 }
