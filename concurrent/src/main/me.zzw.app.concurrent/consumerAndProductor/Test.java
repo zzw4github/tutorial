@@ -1,4 +1,4 @@
-package main.me.zzw.app.concurrent.consumerAndProductor;
+package me.zzw.app.concurrent.consumerAndProductor;
 
 /**
  * Created by infosea on 2016-09-09.

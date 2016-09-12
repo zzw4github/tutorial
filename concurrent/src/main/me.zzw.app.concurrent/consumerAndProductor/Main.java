@@ -1,4 +1,4 @@
-package main.me.zzw.app.concurrent.consumerAndProductor;
+package me.zzw.app.concurrent.consumerAndProductor;
 
 import java.util.Stack;
 

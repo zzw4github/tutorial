@@ -1,4 +1,4 @@
-package main.me.zzw.app.concurrent;
+package me.zzw.app.concurrent;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.RunnableFuture;

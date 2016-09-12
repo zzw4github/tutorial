@@ -1,4 +1,4 @@
-package main.me.zzw.app.concurrent;
+package me.zzw.app.concurrent;
 
 import java.util.concurrent.CountedCompleter;
 import java.util.concurrent.atomic.AtomicReference;
@@ -142,8 +142,8 @@ class Searcher<E> extends CountedCompleter<E> {
 
 }
 
-class MyMapper<E> { E apply(E v) {  ...  } }
-class MyReducer<E> { E apply(E x, E y) {  ...  } }
+class MyMapper<E> { E apply(E v) {  return v;  } }
+class MyReducer<E> { E apply(E x, E y) {  return x;  } }
 class MapReducer<E> extends CountedCompleter<E> {
     final E[] array; final MyMapper<E> mapper;
     final MyReducer<E> reducer; final int lo, hi;
